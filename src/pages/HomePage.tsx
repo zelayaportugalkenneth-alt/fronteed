@@ -1,18 +1,42 @@
-import Navbar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
+
+
+import { authRepository } from "../repositories/authRepository";
+
 
 function HomePage() {
-  return (
-    <>
-      <Navbar />
+  const navigate = useNavigate();
+  const user = authRepository.getCurrentUser();
 
-      <main className="mx-auto max-w-7xl p-8">
-        <h1 className="text-4xl font-bold">Página principal</h1>
-        <p className="mt-4 text-gray-600">
-          Bienvenido a la aplicación.
-        </p>
-      </main>
-    </>
+
+  const handleLogout = () => {
+    authRepository.logout();
+    navigate("/login", { replace: true });
+  };
+
+
+  return (
+    <main>
+      <h1>Página principal</h1>
+
+
+      {user ? (
+        <>
+          <p>Bienvenido, {user.name}</p>
+          <p>Carnet: {user.carnet}</p>
+          <p>Rol: {user.role}</p>
+
+
+          <button type="button" onClick={handleLogout}>
+            Cerrar sesión
+          </button>
+        </>
+      ) : (
+        <p>No existe una sesión activa.</p>
+      )}
+    </main>
   );
 }
+
 
 export default HomePage;
