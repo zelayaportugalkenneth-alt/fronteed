@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormEventHandler } from "react";
 import type { LoginCredentials } from "../../types/auth";
-
+import "./LoginForm.css";
 
 interface LoginFormProps {
   error?: string;
@@ -34,15 +34,16 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Iniciar sesión</h1>
+     <form className="login-form" onSubmit={handleSubmit}>
+      <h1 className="login-form__title">Iniciar sesión</h1>
 
 
-      <div>
-        <label htmlFor="carnet">Carnet de identidad</label>
+      <div className="login-form__field">
+        <label className="login-form__label" htmlFor="carnet">Carnet de identidad</label>
 
 
         <input
+          className="login-form__input"
           id="carnet"
           name="carnet"
           type="text"
@@ -55,11 +56,12 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
       </div>
 
 
-      <div>
-        <label htmlFor="password">Contraseña</label>
+      <div className="login-form__field">
+        <label className="login-form__label" htmlFor="password">Contraseña</label>
 
 
         <input
+          className="login-form__input"
           id="password"
           name="password"
           type="password"
@@ -73,13 +75,13 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
 
 
       {error && (
-        <p role="alert" aria-live="polite">
+       <p className="login-form__error" role="alert" aria-live="polite">
           {error}
         </p>
       )}
 
 
-      <button type="submit">Ingresar</button>
+      <button className="login-form__button" type="submit">Ingresar</button>
     </form>
   );
 }
