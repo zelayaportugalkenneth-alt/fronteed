@@ -1,35 +1,35 @@
-function Navbar() {
+import "./NavBar.css";
+
+interface NavBarProps {
+  userName: string;
+}
+
+function NavBar({ userName }: NavBarProps) {
   return (
-    <nav className="bg-slate-900 text-white shadow-lg">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        {/* Logo */}
-        <a href="/" className="text-2xl font-bold tracking-wide">
-          MiApp
+    <header className="nav-bar">
+      <nav className="nav-bar__content" aria-label="Navegación principal">
+        <a className="nav-bar__brand" href="/" aria-label="Ir al inicio">
+          <span className="nav-bar__logo" aria-hidden="true">
+            H
+          </span>
+          <span>Hospital</span>
         </a>
 
-        {/* Menú */}
-        <ul className="flex items-center gap-6">
-          <li>
-            <a
-              href="/"
-              className="transition-colors hover:text-cyan-400"
-            >
-              Inicio
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="/login"
-              className="rounded-md bg-cyan-500 px-4 py-2 font-medium transition-colors hover:bg-cyan-600"
-            >
-              Iniciar sesión
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <div className="nav-bar__actions">
+          <span className="nav-bar__user">{userName}</span>
+          <button className="nav-bar__button" type="button">
+            Perfil
+          </button>
+          <button className="nav-bar__button" type="button">
+            Entrevistas
+          </button>
+          <button className="nav-bar__button" type="button">
+            Notificaciones
+          </button>
+        </div>
+      </nav>
+    </header>
   );
 }
 
-export default Navbar;
+export default NavBar;
