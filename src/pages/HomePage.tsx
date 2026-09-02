@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import { authRepository } from "../repositories/authRepository";
+import NavBar from "../components/NavBar";
 
 
 function HomePage() {
@@ -16,25 +17,29 @@ function HomePage() {
 
 
   return (
-    <main>
-      <h1>Página principal</h1>
+    <>
+      <NavBar userName={user?.name ?? "Invitado"} />
+
+      <main>
+        <h1>Página principal</h1>
 
 
-      {user ? (
-        <>
-          <p>Bienvenido, {user.name}</p>
-          <p>Carnet: {user.carnet}</p>
-          <p>Rol: {user.role}</p>
+        {user ? (
+          <>
+            <p>Bienvenido, {user.name}</p>
+            <p>Carnet: {user.carnet}</p>
+            <p>Rol: {user.role}</p>
 
 
-          <button type="button" onClick={handleLogout}>
-            Cerrar sesión
-          </button>
-        </>
-      ) : (
-        <p>No existe una sesión activa.</p>
-      )}
-    </main>
+            <button type="button" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          </>
+        ) : (
+          <p>No existe una sesión activa.</p>
+        )}
+      </main>
+    </>
   );
 }
 
