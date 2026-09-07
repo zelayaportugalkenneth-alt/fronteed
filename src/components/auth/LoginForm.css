@@ -9,11 +9,73 @@
 }
 
 .login-form__title {
-  margin: 0 0 1.75rem;
+  margin: 0 0 0.6rem;
   color: #111827;
   font-size: clamp(2rem, 5vw, 2.6rem);
   line-height: 1;
   text-align: center;
+}
+
+.login-form__description {
+  margin: 0 0 1.75rem;
+  color: #64748b;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.login-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  align-items: center;
+  gap: clamp(2.5rem, 8vw, 8rem);
+  width: min(100% - 3rem, 1080px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.login-page__intro {
+  max-width: 560px;
+}
+
+.login-page__emblem {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0f2f4d, #0f5b8d);
+  box-shadow: 0 16px 32px rgba(15, 47, 77, 0.24);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.login-page__school {
+  margin: 0 0 0.75rem;
+  color: #0f5b8d;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.login-page__intro h2 {
+  max-width: 10ch;
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.04;
+}
+
+.login-page__copy {
+  max-width: 46ch;
+  margin: 1.5rem 0 0;
+  color: #475569;
+  font-size: 1.08rem;
+  line-height: 1.65;
 }
 
 .login-form__field {
@@ -86,6 +148,27 @@
 
 .login-form__button:active {
   transform: translateY(0);
+}
+
+@media (max-width: 760px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    width: min(100% - 2rem, 420px);
+  }
+
+  .login-page__intro {
+    text-align: center;
+  }
+
+  .login-page__emblem {
+    margin-inline: auto;
+  }
+
+  .login-page__intro h2,
+  .login-page__copy {
+    margin-inline: auto;
+  }
 }
 
 @media (max-width: 480px) {

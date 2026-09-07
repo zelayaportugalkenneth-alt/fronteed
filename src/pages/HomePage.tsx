@@ -21,13 +21,13 @@ function HomePage() {
       <NavBar userName={user?.name ?? "Invitado"} />
 
       <main>
-        <h1>Página principal</h1>
+        <h1>Registro de Entrevistas Académicas</h1>
 
 
         {user ? (
           <>
             <p>Bienvenido, {user.name}</p>
-            <p>Carnet: {user.carnet}</p>
+            <p>Usuario: {user.username}</p>
             <p>Rol: {user.role}</p>
 
 

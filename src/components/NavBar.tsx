@@ -12,7 +12,7 @@ function NavBar({ userName }: NavBarProps) {
           <span className="nav-bar__logo" aria-hidden="true">
             H
           </span>
-          <span>Hospital</span>
+          <span>Colegio Don Bosco Sucre</span>
         </a>
 
         <div className="nav-bar__actions">
