@@ -1,6 +1,6 @@
 .nav-bar {
-  background: #0f2f4d;
-  box-shadow: 0 4px 16px rgba(15, 47, 77, 0.16);
+  background: #0d2945;
+  box-shadow: 0 4px 16px rgba(13, 41, 69, 0.18);
 }
 
 .nav-bar__content {
@@ -31,9 +31,9 @@
   height: 40px;
   place-items: center;
   border-radius: 10px;
-  background: #ffffff;
-  color: #0f5b8d;
-  font-size: 1.35rem;
+  background: #f6c945;
+  color: #0d2945;
+  font-size: 0.9rem;
   font-weight: 800;
 }
 
@@ -65,12 +65,17 @@
 
 .nav-bar__button:hover,
 .nav-bar__button:focus-visible {
-  background: #ffffff;
+  background: #f6c945;
   color: #0f2f4d;
 }
 
+.nav-bar__button--logout {
+  border-color: #f6c945;
+  color: #f9d765;
+}
+
 .nav-bar__button:focus-visible {
-  outline: 3px solid #7dd3fc;
+  outline: 3px solid #f6c945;
   outline-offset: 2px;
 }
 

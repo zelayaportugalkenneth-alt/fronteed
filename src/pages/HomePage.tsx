@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { authRepository } from "../repositories/authRepository";
 import NavBar from "../components/NavBar";
+import SecretaryDashboard from "../components/SecretaryDashboard";
 
 
 function HomePage() {
@@ -18,27 +19,17 @@ function HomePage() {
 
   return (
     <>
-      <NavBar userName={user?.name ?? "Invitado"} />
+      <NavBar userName={user?.name ?? "Invitado"} onLogout={handleLogout} />
 
-      <main>
-        <h1>Registro de Entrevistas Académicas</h1>
-
-
-        {user ? (
-          <>
-            <p>Bienvenido, {user.name}</p>
-            <p>Usuario: {user.username}</p>
-            <p>Rol: {user.role}</p>
-
-
-            <button type="button" onClick={handleLogout}>
-              Cerrar sesión
-            </button>
-          </>
-        ) : (
-          <p>No existe una sesión activa.</p>
-        )}
-      </main>
+      {user?.role === "SECRETARIA_INFORMACIONES" ? (
+        <SecretaryDashboard />
+      ) : (
+        <main className="role-welcome">
+          <p className="eyebrow">Profesor</p>
+          <h1>Registro de Entrevistas Académicas</h1>
+          <p>Bienvenido, {user?.name ?? "Invitado"}.</p>
+        </main>
+      )}
     </>
   );
 }

@@ -1,10 +1,10 @@
 .login-form {
   width: min(100%, 420px);
   padding: 2.5rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid rgba(246, 201, 69, 0.55);
   border-radius: 28px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.9));
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+  background: linear-gradient(145deg, #ffffff, #fffdf5);
+  box-shadow: 0 24px 70px rgba(13, 41, 69, 0.18);
   color: #0f172a;
 }
 
@@ -45,9 +45,9 @@
   place-items: center;
   margin-bottom: 1.5rem;
   border-radius: 18px;
-  background: linear-gradient(135deg, #0f2f4d, #0f5b8d);
+  background: #f6c945;
   box-shadow: 0 16px 32px rgba(15, 47, 77, 0.24);
-  color: #ffffff;
+  color: #0d2945;
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -55,7 +55,7 @@
 
 .login-page__school {
   margin: 0 0 0.75rem;
-  color: #0f5b8d;
+  color: #0d2945;
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -108,8 +108,8 @@
 }
 
 .login-form__input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
+  border-color: #e1ae14;
+  box-shadow: 0 0 0 4px rgba(246, 201, 69, 0.28);
   outline: none;
   transform: translateY(-1px);
 }
@@ -130,9 +130,9 @@
   padding: 1rem 1.25rem;
   border: 0;
   border-radius: 16px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.28);
-  color: #ffffff;
+  background: #f6c945;
+  box-shadow: 0 16px 32px rgba(246, 201, 69, 0.3);
+  color: #0d2945;
   cursor: pointer;
   font: inherit;
   font-weight: 800;
@@ -142,7 +142,7 @@
 
 .login-form__button:hover {
   filter: brightness(1.05);
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.34);
+  box-shadow: 0 20px 40px rgba(246, 201, 69, 0.42);
   transform: translateY(-2px);
 }
 
