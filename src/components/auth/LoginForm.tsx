@@ -10,7 +10,7 @@ interface LoginFormProps {
 
 
 function LoginForm({ error, onSubmit }: LoginFormProps) {
-  const [carnet, setCarnet] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
 
@@ -18,16 +18,16 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
     event.preventDefault();
 
 
-    const normalizedCarnet = carnet.trim();
+    const normalizedUsername = username.trim();
 
 
-    if (!normalizedCarnet || !password) {
+    if (!normalizedUsername || !password) {
       return;
     }
 
 
     onSubmit({
-      carnet: normalizedCarnet,
+      username: normalizedUsername,
       password,
     });
   };
@@ -36,20 +36,21 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
   return (
      <form className="login-form" onSubmit={handleSubmit}>
       <h1 className="login-form__title">Iniciar sesión</h1>
+      <p className="login-form__description">Ingresa tus credenciales para continuar.</p>
 
 
       <div className="login-form__field">
-        <label className="login-form__label" htmlFor="carnet">Carnet de identidad</label>
+        <label className="login-form__label" htmlFor="username">Usuario</label>
 
 
         <input
           className="login-form__input"
-          id="carnet"
-          name="carnet"
+          id="username"
+          name="username"
           type="text"
-          value={carnet}
-          onChange={(event) => setCarnet(event.target.value)}
-          placeholder="Ingrese su carnet"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder="Ingresa tu usuario"
           autoComplete="username"
           required
         />

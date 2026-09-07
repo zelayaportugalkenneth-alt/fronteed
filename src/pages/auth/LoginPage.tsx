@@ -7,6 +7,7 @@ import { authRepository } from "../../repositories/authRepository";
 
 
 import type { LoginCredentials } from "../../types/auth";
+import "../../components/auth/LoginForm.css";
 
 
 function LoginPage() {
@@ -27,7 +28,7 @@ function LoginPage() {
 
 
     if (!user) {
-      setError("El carnet o la contraseña son incorrectos.");
+      setError("El usuario o la contraseña son incorrectos.");
       return;
     }
 
@@ -37,11 +38,17 @@ function LoginPage() {
 
 
   return (
-    <main>
-      <LoginForm
-        error={error}
-        onSubmit={handleLogin}
-      />
+    <main className="login-page">
+      <section className="login-page__intro" aria-labelledby="login-page-title">
+        <div className="login-page__emblem" aria-hidden="true">DB</div>
+        <p className="login-page__school">Colegio Don Bosco Sucre</p>
+        <h2 id="login-page-title">Registro de Entrevistas Académicas</h2>
+        <p className="login-page__copy">
+          Gestiona y consulta las solicitudes de entrevistas de forma ordenada.
+        </p>
+      </section>
+
+      <LoginForm error={error} onSubmit={handleLogin} />
     </main>
   );
 }
