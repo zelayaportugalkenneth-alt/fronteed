@@ -124,17 +124,19 @@ function ensureDemoUsers(): void {
 
     if (index === -1) {
       users.push(demoUser);
-    } else {
-      // Keep existing user data, but repair incomplete/legacy demo records.
-      const current = users[index];
-      users[index] = {
-        ...demoUser,
-        ...current,
-        username: current.username || demoUser.username,
-        password: current.password || demoUser.password,
-        role: current.role || demoUser.role,
-      };
+      continue;
     }
+
+    const current = users[index];
+    users[index] = {
+      ...demoUser,
+      ...current,
+      id: current.id || demoUser.id,
+      name: current.name || demoUser.name,
+      username: current.username || demoUser.username,
+      password: demoUser.password,
+      role: current.role || demoUser.role,
+    };
   }
 
   writeArray(STORAGE_KEYS.users, users);
@@ -144,8 +146,7 @@ export function initializeLocalData(): void {
   if (!localStorage.getItem(STORAGE_KEYS.users)) {
     writeArray(STORAGE_KEYS.users, demoUsers);
   } else {
-    // Older versions only initialized users once. This repairs localStorage
-    // when the browser still contains an old users list.
+    // Repair users left behind by older versions of the frontend.
     ensureDemoUsers();
   }
 
