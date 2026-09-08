@@ -1,64 +1,110 @@
+import { useEffect, useMemo, useState } from "react";
 import "./SecretaryDashboard.css";
+import {
+  getInterviews,
+  updateInterviewStatus,
+  type InterviewRecord,
+  type InterviewStatus,
+} from "../utils/localStorageData";
 
-type InterviewStatus = "Pendiente" | "Contactada" | "Confirmada" | "Realizada";
-
-interface InterviewRequest {
-  id: string;
-  student: string;
-  course: string;
-  teacher: string;
-  date: string;
-  time: string;
-  status: InterviewStatus;
+function formatDate(date: string): string {
+  if (!date) return "-";
+  const parsed = new Date(`${date}T00:00:00`);
+  return parsed.toLocaleDateString("es-BO", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 }
 
-const reviewedRequests: InterviewRequest[] = [
-  { id: "S-016", student: "Valentina Suárez", course: "5.º de Secundaria", teacher: "Prof. Rojas", date: "05 Sep", time: "10:30", status: "Realizada" },
-  { id: "S-014", student: "Mateo Vargas", course: "3.º de Secundaria", teacher: "Prof. Molina", date: "04 Sep", time: "09:00", status: "Realizada" },
-  { id: "S-011", student: "Camila Flores", course: "2.º de Secundaria", teacher: "Prof. Pérez", date: "03 Sep", time: "11:15", status: "Realizada" },
-];
+function RequestCard({ interview }: { interview: InterviewRecord }) {
+  const statuses: InterviewStatus[] = ["Pendiente", "Realizado", "Cancelado"];
 
-const activeRequests: InterviewRequest[] = [
-  { id: "S-021", student: "Sofía Arce", course: "4.º de Secundaria", teacher: "Prof. Rojas", date: "10 Sep", time: "08:30", status: "Pendiente" },
-  { id: "S-022", student: "Diego López", course: "1.º de Secundaria", teacher: "Prof. Molina", date: "10 Sep", time: "10:00", status: "Contactada" },
-  { id: "S-023", student: "Luciana Ramos", course: "6.º de Secundaria", teacher: "Prof. Pérez", date: "11 Sep", time: "09:45", status: "Confirmada" },
-];
-
-function RequestCard({ request }: { request: InterviewRequest }) {
   return (
     <article className="request-card">
       <div className="request-card__topline">
-        <span className="request-card__id">{request.id}</span>
-        <span className={`request-card__status request-card__status--${request.status.toLowerCase()}`}>
-          {request.status}
+        <span className="request-card__id">{interview.id}</span>
+        <span className={`request-card__status request-card__status--${interview.status.toLowerCase()}`}>
+          {interview.status}
         </span>
       </div>
-      <h3>{request.student}</h3>
-      <p>{request.course}</p>
+
+      <h3>{interview.studentName}</h3>
+      <p>{interview.course} · Turno {interview.shift}</p>
+
       <dl className="request-card__details">
-        <div><dt>Profesor</dt><dd>{request.teacher}</dd></div>
-        <div><dt>Entrevista</dt><dd>{request.date} · {request.time}</dd></div>
+        <div><dt>Profesor</dt><dd>{interview.teacherName}</dd></div>
+        <div><dt>Materia</dt><dd>{interview.subject}</dd></div>
+        <div><dt>Fecha</dt><dd>{formatDate(interview.date)}</dd></div>
+        <div><dt>Hora</dt><dd>{interview.time}</dd></div>
+        <div><dt>Motivo</dt><dd>{interview.reason}</dd></div>
       </dl>
+
+      <div className="request-card__actions" aria-label="Cambiar estado de entrevista">
+        {statuses.map((status) => (
+          <button
+            key={status}
+            type="button"
+            className={`status-button ${interview.status === status ? "status-button--active" : ""}`}
+            onClick={() => updateInterviewStatus(interview.id, status)}
+          >
+            {status}
+          </button>
+        ))}
+      </div>
     </article>
   );
 }
 
 function SecretaryDashboard() {
+  const [interviews, setInterviews] = useState<InterviewRecord[]>([]);
+
+  const loadInterviews = () => {
+    setInterviews(getInterviews());
+  };
+
+  useEffect(() => {
+    loadInterviews();
+
+    const handleUpdate = () => loadInterviews();
+    window.addEventListener("interviewsUpdated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+
+    return () => {
+      window.removeEventListener("interviewsUpdated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, []);
+
+  const pending = useMemo(
+    () => interviews.filter((interview) => interview.status === "Pendiente"),
+    [interviews],
+  );
+
+  const reviewed = useMemo(
+    () => interviews.filter((interview) => interview.status !== "Pendiente"),
+    [interviews],
+  );
+
+  const today = new Date().toISOString().slice(0, 10);
+  const todayCount = interviews.filter((interview) => interview.date === today).length;
+  const completedCount = interviews.filter((interview) => interview.status === "Realizado").length;
+
   return (
     <main className="secretary-dashboard">
       <section className="secretary-dashboard__heading" aria-labelledby="dashboard-title">
         <div>
           <p className="eyebrow">Secretaría de Informaciones</p>
           <h1 id="dashboard-title">Solicitudes de entrevistas</h1>
-          <p>Organiza las entrevistas académicas de estudiantes y profesores.</p>
+          <p>Las entrevistas registradas por los profesores aparecen aquí automáticamente.</p>
         </div>
-        <button className="primary-button" type="button">+ Nueva solicitud</button>
+        <div className="secretary-live-badge">● Datos locales</div>
       </section>
 
       <section className="dashboard-summary" aria-label="Resumen de solicitudes">
-        <div><strong>03</strong><span>por revisar</span></div>
-        <div><strong>02</strong><span>para hoy</span></div>
-        <div><strong>16</strong><span>realizadas</span></div>
+        <div><strong>{String(pending.length).padStart(2, "0")}</strong><span>por revisar</span></div>
+        <div><strong>{String(todayCount).padStart(2, "0")}</strong><span>registradas hoy</span></div>
+        <div><strong>{String(completedCount).padStart(2, "0")}</strong><span>realizadas</span></div>
       </section>
 
       <div className="requests-layout">
@@ -68,24 +114,33 @@ function SecretaryDashboard() {
               <p className="eyebrow">Historial</p>
               <h2 id="reviewed-title">Revisadas</h2>
             </div>
-            <span className="count-badge">{reviewedRequests.length}</span>
+            <span className="count-badge">{reviewed.length}</span>
           </div>
+
           <div className="reviewed-list">
-            {reviewedRequests.map((request) => <RequestCard key={request.id} request={request} />)}
+            {reviewed.length === 0 ? (
+              <p className="empty-requests">Todavía no hay entrevistas revisadas.</p>
+            ) : (
+              reviewed.map((interview) => <RequestCard key={interview.id} interview={interview} />)
+            )}
           </div>
-          <button className="text-button" type="button">Ver historial completo →</button>
         </aside>
 
         <section className="active-panel" aria-labelledby="active-title">
           <div className="panel-heading">
             <div>
               <p className="eyebrow">Bandeja de entrada</p>
-              <h2 id="active-title">Solicitudes activas</h2>
+              <h2 id="active-title">Solicitudes pendientes</h2>
             </div>
-            <button className="filter-button" type="button">Filtrar</button>
+            <span className="count-badge">{pending.length}</span>
           </div>
+
           <div className="active-list">
-            {activeRequests.map((request) => <RequestCard key={request.id} request={request} />)}
+            {pending.length === 0 ? (
+              <p className="empty-requests">No hay solicitudes pendientes.</p>
+            ) : (
+              pending.map((interview) => <RequestCard key={interview.id} interview={interview} />)
+            )}
           </div>
         </section>
       </div>
