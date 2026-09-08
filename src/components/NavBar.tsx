@@ -18,8 +18,6 @@ function NavBar({ userName, onLogout }: NavBarProps) {
 
         <div className="nav-bar__actions">
           <span className="nav-bar__user">{userName}</span>
-          <button className="nav-bar__button" type="button">Inicio</button>
-          <button className="nav-bar__button" type="button">Entrevistas</button>
           <button className="nav-bar__button nav-bar__button--logout" type="button" onClick={onLogout}>Salir</button>
         </div>
       </nav>
