@@ -8,9 +8,11 @@ export const authRepository = {
   login(credentials: LoginCredentials): User | null {
     initializeLocalData();
 
+    const normalizedUsername = credentials.username.trim().toLowerCase();
+
     const foundUser = getUsers().find(
       (user) =>
-        user.username === credentials.username &&
+        user.username.trim().toLowerCase() === normalizedUsername &&
         user.password === credentials.password,
     );
 
