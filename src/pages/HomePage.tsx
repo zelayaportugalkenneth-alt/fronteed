@@ -20,8 +20,14 @@ function HomePage() {
 
       {user?.role === "SECRETARIA_INFORMACIONES" ? (
         <SecretaryDashboard />
-      ) : (
+      ) : user?.role === "PROFESOR" ? (
         <ProfessorDashboard />
+      ) : (
+        <main className="role-welcome">
+          <p className="eyebrow">Administrador</p>
+          <h1>Registro de Entrevistas Académicas</h1>
+          <p>Bienvenido, {user?.name ?? "Invitado"}.</p>
+        </main>
       )}
     </>
   );
