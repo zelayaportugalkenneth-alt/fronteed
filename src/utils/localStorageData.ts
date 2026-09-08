@@ -113,9 +113,40 @@ function writeArray<T>(key: string, value: T[]): void {
   }
 }
 
+function ensureDemoUsers(): void {
+  const storedUsers = readArray<UserRecord>(STORAGE_KEYS.users);
+  const users = [...storedUsers];
+
+  for (const demoUser of demoUsers) {
+    const index = users.findIndex(
+      (user) => user.username?.trim().toLowerCase() === demoUser.username.toLowerCase(),
+    );
+
+    if (index === -1) {
+      users.push(demoUser);
+    } else {
+      // Keep existing user data, but repair incomplete/legacy demo records.
+      const current = users[index];
+      users[index] = {
+        ...demoUser,
+        ...current,
+        username: current.username || demoUser.username,
+        password: current.password || demoUser.password,
+        role: current.role || demoUser.role,
+      };
+    }
+  }
+
+  writeArray(STORAGE_KEYS.users, users);
+}
+
 export function initializeLocalData(): void {
   if (!localStorage.getItem(STORAGE_KEYS.users)) {
     writeArray(STORAGE_KEYS.users, demoUsers);
+  } else {
+    // Older versions only initialized users once. This repairs localStorage
+    // when the browser still contains an old users list.
+    ensureDemoUsers();
   }
 
   if (!localStorage.getItem(STORAGE_KEYS.students)) {
