@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 import "./ProfessorDashboard.css";
 
 interface InterviewRecord {
@@ -32,7 +33,7 @@ function ProfessorDashboard() {
   const [time, setTime] = useState("");
   const [reason, setReason] = useState("");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!student.trim() || !course.trim() || !subject.trim() || !time || !reason.trim()) {
@@ -106,7 +107,10 @@ function ProfessorDashboard() {
 
             <label>
               <span>Turno</span>
-              <select value={shift} onChange={(event) => setShift(event.target.value as "Mañana" | "Tarde")}>
+              <select
+                value={shift}
+                onChange={(event) => setShift(event.target.value as "Mañana" | "Tarde")}
+              >
                 <option value="Mañana">Mañana</option>
                 <option value="Tarde">Tarde</option>
               </select>
