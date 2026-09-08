@@ -1,0 +1,280 @@
+.professor-dashboard {
+  width: min(100% - 3rem, 1180px);
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+  color: #14263d;
+}
+
+.professor-dashboard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.professor-dashboard__header h1,
+.interview-form h2,
+.records-panel h2 {
+  margin: 0;
+  color: #0d2945;
+}
+
+.professor-dashboard__header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+}
+
+.professor-dashboard__header > div:first-child > p:last-child {
+  max-width: 650px;
+  margin: 0.65rem 0 0;
+  color: #627286;
+}
+
+.professor-eyebrow {
+  margin: 0 0 0.35rem;
+  color: #9a7100;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.professor-header-badge {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  place-items: center;
+  border: 1px solid #f6c945;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #0d2945, #174b70);
+  color: #f6c945;
+  font-size: 0.75rem;
+  font-weight: 900;
+  box-shadow: 0 14px 30px rgba(13, 41, 69, 0.16);
+}
+
+.professor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.8fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.interview-form,
+.records-panel {
+  padding: 1.5rem;
+  border: 1px solid #e2e8ef;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(13, 41, 69, 0.07);
+}
+
+.interview-form {
+  border-top: 4px solid #f6c945;
+}
+
+.form-heading,
+.records-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-heading {
+  justify-content: flex-start;
+}
+
+.form-heading h2,
+.records-heading h2 {
+  font-size: 1.25rem;
+}
+
+.form-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: #fff4cf;
+  color: #8a6400;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.form-grid label {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.form-grid label span {
+  color: #334a62;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d8e0e8;
+  border-radius: 10px;
+  outline: none;
+  background: #fbfcfd;
+  color: #14263d;
+  font: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.form-grid input,
+.form-grid select {
+  height: 44px;
+  padding: 0 0.8rem;
+}
+
+.form-grid textarea {
+  min-height: 100px;
+  padding: 0.75rem 0.8rem;
+  resize: vertical;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus {
+  border-color: #f0bd24;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(246, 201, 69, 0.18);
+}
+
+.form-grid input::placeholder,
+.form-grid textarea::placeholder {
+  color: #9aa7b5;
+}
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+.professor-submit {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #f6c945;
+  color: #0d2945;
+  font: inherit;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(246, 201, 69, 0.25);
+}
+
+.professor-submit:hover {
+  background: #ffd85e;
+}
+
+.records-count {
+  display: grid;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.35rem;
+  box-sizing: border-box;
+  place-items: center;
+  border-radius: 999px;
+  background: #edf2f6;
+  color: #0d2945;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.records-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.interview-record {
+  padding: 1rem;
+  border: 1px solid #e6ebf0;
+  border-radius: 12px;
+  background: #fbfcfd;
+}
+
+.record-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.record-student {
+  color: #0d2945;
+  font-weight: 800;
+}
+
+.record-shift {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: #e5f5e9;
+  color: #26723b;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.record-course {
+  margin: 0.35rem 0 0;
+  color: #66778a;
+  font-size: 0.82rem;
+}
+
+.record-details {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid #e6ebf0;
+  color: #56697c;
+  font-size: 0.78rem;
+}
+
+.record-details strong {
+  color: #334a62;
+}
+
+@media (max-width: 900px) {
+  .professor-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .professor-dashboard {
+    width: min(100% - 2rem, 560px);
+    padding-top: 2rem;
+  }
+
+  .professor-dashboard__header {
+    align-items: flex-start;
+  }
+
+  .professor-header-badge {
+    display: none;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field--full {
+    grid-column: auto;
+  }
+}
