@@ -38,19 +38,13 @@
   max-width: 560px;
 }
 
-.login-page__emblem {
-  display: grid;
-  width: 68px;
-  height: 68px;
-  place-items: center;
+.login-page__school-logo {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
   margin-bottom: 1.5rem;
-  border-radius: 18px;
-  background: #f6c945;
-  box-shadow: 0 16px 32px rgba(15, 47, 77, 0.24);
-  color: #0d2945;
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  filter: drop-shadow(0 12px 18px rgba(13, 41, 69, 0.16));
 }
 
 .login-page__school {
@@ -161,7 +155,9 @@
     text-align: center;
   }
 
-  .login-page__emblem {
+  .login-page__school-logo {
+    width: 125px;
+    height: 125px;
     margin-inline: auto;
   }
 
