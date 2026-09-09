@@ -1,4 +1,5 @@
 import "./NavBar.css";
+import schoolLogo from "../data/schoolLogo";
 
 interface NavBarProps {
   userName: string;
@@ -10,9 +11,7 @@ function NavBar({ userName, onLogout }: NavBarProps) {
     <header className="nav-bar">
       <nav className="nav-bar__content" aria-label="Navegación principal">
         <a className="nav-bar__brand" href="/" aria-label="Ir al inicio">
-          <span className="nav-bar__logo" aria-hidden="true">
-            DB
-          </span>
+          <img className="nav-bar__logo-image" src="/logo-escudo.webp" alt="Colegio Don Bosco Sucre" />
           <span>Colegio Don Bosco Sucre</span>
         </a>
 
