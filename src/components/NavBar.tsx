@@ -1,5 +1,4 @@
 import "./NavBar.css";
-import schoolLogo from "../data/schoolLogo";
 
 interface NavBarProps {
   userName: string;
