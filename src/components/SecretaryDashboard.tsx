@@ -3,6 +3,7 @@ import "./SecretaryDashboard.css";
 import "./SecretaryDashboardFunctional.css";
 import {
   getInterviews,
+  getToday,
   updateInterviewStatus,
   type InterviewRecord,
   type InterviewStatus,
@@ -72,7 +73,7 @@ function SecretaryDashboard() {
 
   const pending = useMemo(() => interviews.filter((interview) => interview.status === "Pendiente"), [interviews]);
   const reviewed = useMemo(() => interviews.filter((interview) => interview.status !== "Pendiente"), [interviews]);
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getToday();
   const todayCount = interviews.filter((interview) => interview.date === today).length;
   const completedCount = interviews.filter((interview) => interview.status === "Realizado").length;
 
