@@ -8,12 +8,27 @@ export const authRepository = {
   login(credentials: LoginCredentials): User | null {
     initializeLocalData();
 
-    const normalizedUsername = credentials.username.trim().toLowerCase();
+    const username = credentials.username.trim().toLowerCase();
+    const password = credentials.password.trim();
+
+    if (!username || !password) {
+      return null;
+    }
+
+    const aliases: Record<string, string> = {
+      maria: "maria.fernandez",
+      secretaria: "maria.fernandez",
+      carlos: "carlos.perez",
+      profesor: "carlos.perez",
+      administrador: "admin",
+    };
+
+    const normalizedUsername = aliases[username] ?? username;
 
     const foundUser = getUsers().find(
       (user) =>
         user.username.trim().toLowerCase() === normalizedUsername &&
-        user.password === credentials.password,
+        user.password === password,
     );
 
     if (!foundUser) {
