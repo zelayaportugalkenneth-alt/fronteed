@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { authRepository } from "../repositories/authRepository";
 import NavBar from "../components/NavBar";
@@ -9,6 +9,10 @@ function HomePage() {
   const navigate = useNavigate();
   const user = authRepository.getCurrentUser();
 
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
   const handleLogout = () => {
     authRepository.logout();
     navigate("/login", { replace: true });
@@ -16,17 +20,17 @@ function HomePage() {
 
   return (
     <>
-      <NavBar userName={user?.name ?? "Invitado"} onLogout={handleLogout} />
+      <NavBar userName={user.name} onLogout={handleLogout} />
 
-      {user?.role === "SECRETARIA_INFORMACIONES" ? (
+      {user.role === "SECRETARIA_INFORMACIONES" ? (
         <SecretaryDashboard />
-      ) : user?.role === "PROFESOR" ? (
+      ) : user.role === "PROFESOR" ? (
         <ProfessorDashboard />
       ) : (
         <main className="role-welcome">
           <p className="eyebrow">Administrador</p>
           <h1>Registro de Entrevistas Académicas</h1>
-          <p>Bienvenido, {user?.name ?? "Invitado"}.</p>
+          <p>Bienvenido, {user.name}.</p>
         </main>
       )}
     </>
