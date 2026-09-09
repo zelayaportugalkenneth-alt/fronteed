@@ -127,16 +127,9 @@ function ensureDemoUsers(): void {
       continue;
     }
 
-    const current = users[index];
-    users[index] = {
-      ...demoUser,
-      ...current,
-      id: current.id || demoUser.id,
-      name: current.name || demoUser.name,
-      username: current.username || demoUser.username,
-      password: demoUser.password,
-      role: current.role || demoUser.role,
-    };
+    // Keep the demo account consistent so old localStorage data cannot
+    // break login or send the user to the wrong role.
+    users[index] = { ...demoUser };
   }
 
   writeArray(STORAGE_KEYS.users, users);
@@ -146,7 +139,6 @@ export function initializeLocalData(): void {
   if (!localStorage.getItem(STORAGE_KEYS.users)) {
     writeArray(STORAGE_KEYS.users, demoUsers);
   } else {
-    // Repair users left behind by older versions of the frontend.
     ensureDemoUsers();
   }
 
@@ -199,8 +191,10 @@ export function saveStudent(student: StudentRecord): void {
 
 export function getToday(): string {
   const now = new Date();
-  const offset = now.getTimezoneOffset();
-  return new Date(now.getTime() - offset * 60_000).toISOString().slice(0, 10);
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 export { STORAGE_KEYS };
