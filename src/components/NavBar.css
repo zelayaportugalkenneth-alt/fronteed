@@ -17,24 +17,16 @@
 .nav-bar__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  color: #ffffff;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
   text-decoration: none;
 }
 
 .nav-bar__logo {
-  display: grid;
-  width: 40px;
-  height: 40px;
-  place-items: center;
+  display: block;
+  width: 58px;
+  height: 58px;
   border-radius: 10px;
-  background: #f6c945;
-  color: #0d2945;
-  font-size: 0.9rem;
-  font-weight: 800;
+  object-fit: contain;
+  object-position: center;
 }
 
 .nav-bar__actions {
