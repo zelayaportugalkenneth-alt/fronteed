@@ -6,7 +6,7 @@ import { authRepository } from "../../repositories/authRepository";
 import type { LoginCredentials } from "../../types/auth";
 import "../../components/auth/LoginForm.css";
 
-const SCHOOL_LOGO = `${import.meta.env.BASE_URL}logo-escudo.webp`;
+const SCHOOL_LOGO = `${import.meta.env.BASE_URL}Gemini_Generated_Image_h8kc53h8kc53h8kc.jpg`;
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -35,10 +35,7 @@ function LoginPage() {
         <img
           className="login-page__school-logo"
           src={SCHOOL_LOGO}
-          alt="Escudo del Colegio Don Bosco Sucre"
-          onError={(event) => {
-            event.currentTarget.style.display = "none";
-          }}
+          alt="Colegio Don Bosco Sucre"
         />
         <p className="login-page__school">Colegio Don Bosco Sucre</p>
         <h2 id="login-page-title">Registro de Entrevistas Académicas</h2>
