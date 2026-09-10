@@ -15,6 +15,7 @@ function NavBar({ userName, onLogout }: NavBarProps) {
             src="/Gemini_Generated_Image_h8kc53h8kc53h8kc.jpg"
             alt="Colegio Don Bosco Sucre"
           />
+          <span className="nav-bar__school-name">Colegio Don Bosco Sucre</span>
         </a>
 
         <div className="nav-bar__actions">
