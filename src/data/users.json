@@ -2,15 +2,15 @@
   {
     "id": "user-1",
     "name": "María Fernández",
-    "username": "maria.fernandez",
-    "password": "demo123",
+    "username": "informaciones",
+    "password": "1234567",
     "role": "SECRETARIA_INFORMACIONES"
   },
   {
     "id": "user-2",
-    "name": "Carlos Pérez",
-    "username": "carlos.perez",
-    "password": "demo123",
+    "name": "Pablo Avila Flores",
+    "username": "pablo.avila",
+    "password": "aura123",
     "role": "PROFESOR"
   }
 ]
