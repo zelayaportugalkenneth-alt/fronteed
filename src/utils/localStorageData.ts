@@ -1,4 +1,5 @@
 import type { UserRecord, UserRole } from "../types/auth";
+import usersData from "../data/users.json";
 
 export type StudentShift = "Mañana" | "Tarde";
 export type InterviewStatus = "Realizado" | "Pendiente" | "Cancelado";
@@ -33,29 +34,7 @@ const STORAGE_KEYS = {
   interviews: "app_interviews",
 } as const;
 
-const demoUsers: UserRecord[] = [
-  {
-    id: "user-1",
-    name: "María Fernández",
-    username: "maria.fernandez",
-    password: "demo123",
-    role: "SECRETARIA_INFORMACIONES",
-  },
-  {
-    id: "user-2",
-    name: "Carlos Pérez",
-    username: "carlos.perez",
-    password: "demo123",
-    role: "PROFESOR",
-  },
-  {
-    id: "user-3",
-    name: "Administrador",
-    username: "admin",
-    password: "admin123",
-    role: "ADMIN",
-  },
-];
+const demoUsers = usersData as UserRecord[];
 
 const demoStudents: StudentRecord[] = [
   {
@@ -84,7 +63,7 @@ const demoInterviews: InterviewRecord[] = [
     course: "5.º de Secundaria",
     shift: "Mañana",
     teacherId: "user-2",
-    teacherName: "Carlos Pérez",
+    teacherName: "Erik Palacios",
     date: "2026-09-08",
     time: "10:30",
     subject: "Matemática",
@@ -114,33 +93,12 @@ function writeArray<T>(key: string, value: T[]): void {
 }
 
 function ensureDemoUsers(): void {
-  const storedUsers = readArray<UserRecord>(STORAGE_KEYS.users);
-  const users = [...storedUsers];
-
-  for (const demoUser of demoUsers) {
-    const index = users.findIndex(
-      (user) => user.username?.trim().toLowerCase() === demoUser.username.toLowerCase(),
-    );
-
-    if (index === -1) {
-      users.push(demoUser);
-      continue;
-    }
-
-    // Keep the demo account consistent so old localStorage data cannot
-    // break login or send the user to the wrong role.
-    users[index] = { ...demoUser };
-  }
-
-  writeArray(STORAGE_KEYS.users, users);
+  // La lista local se sincroniza con users.json para eliminar cuentas antiguas.
+  writeArray(STORAGE_KEYS.users, demoUsers);
 }
 
 export function initializeLocalData(): void {
-  if (!localStorage.getItem(STORAGE_KEYS.users)) {
-    writeArray(STORAGE_KEYS.users, demoUsers);
-  } else {
-    ensureDemoUsers();
-  }
+  ensureDemoUsers();
 
   if (!localStorage.getItem(STORAGE_KEYS.students)) {
     writeArray(STORAGE_KEYS.students, demoStudents);
